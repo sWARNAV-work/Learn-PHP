@@ -1,6 +1,6 @@
-<?php require 'partials/head.php'; ?>
-<?php require 'partials/nav.php'; ?>
-<?php require('partials/banner.php'); ?>
+<?php require __DIR__ . '/../partials/head.php'; ?>
+<?php require 'views/partials/nav.php'; ?>
+<?php require('views/partials/banner.php'); ?>
 
 <main>
   <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -13,7 +13,7 @@
             <label for="body" class="block text-sm/6 font-medium text-white">Enter your note: </label>
             <div class="mt-2">
               <textarea id="body" name="body" placeholder="Enter your ideas here..." rows="3"
-                class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"><?=$_POST["body"] ?? "" ?></textarea>
+                class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"><?= $_POST["body"] ?? "" ?></textarea>
               <?php if (isset($errors['body'])): ?>
                 <p class="text-red-900 font-bold text-xs mt-2"><?= $errors['body'] ?></p>
               <?php endif; ?>
