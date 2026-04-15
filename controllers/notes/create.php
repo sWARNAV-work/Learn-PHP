@@ -1,16 +1,16 @@
 <?php
 
-require 'validator.php';
+require base_path('validator.php');
 
 
-$config = require 'config.php';
+$config = require base_path('config.php');
 $db = new Database($config['database']); //Creating the database class obj and passing the database connection values
 
+$errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
     
-    $errors = [];
     $range = 50;
 
     if (! Validator::string($_POST['body'],1,$range))
@@ -26,8 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     }
 }
 
-$heading = 'Create a Note';
 
-require "views/notes/create.view.php";
 
+view("notes/create.view.php", [
+    'heading' => "Create a Note",
+    "errors" => $errors
+]);
 ?>

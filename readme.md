@@ -1,2 +1,3 @@
 # Learning PHP
 I had already started learning PHP and was midway through the course on Laracast.com when this project was initialized. This happened because I was only aware of git at that 'midway' of this project. I would list every changes from now on. 
+## Might have some Not-so-friendly-words

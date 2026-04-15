@@ -4,8 +4,8 @@
   
   <main>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <p class="px-4">What the fuck did you type, Dumbwit?</p>
-      <a href="/" class="text-blue-900 underline">Get the fuck back</a>
+      <p class="text-4xl mb-4">Address not Found</p>
+      <a href="/" class="text-blue-900 underline">Get back to the Main Page</a>
     </div>
   </main>
 </div>
