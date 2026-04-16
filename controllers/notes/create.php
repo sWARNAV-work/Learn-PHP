@@ -1,6 +1,6 @@
 <?php
 
-require base_path('validator.php');
+require base_path('core/validator.php');
 
 
 $config = require base_path('config.php');
