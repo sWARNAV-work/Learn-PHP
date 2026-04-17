@@ -1,0 +1,82 @@
+<?php 
+
+class Router 
+{
+    public function get()
+    {
+
+    }
+    public function post()
+    {
+
+    }
+    public function delete()
+    {
+
+    }
+    public function put()
+    {
+
+    }
+    public function patch()
+    {
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
+
+// $routes = require base_path('routes.php');
+
+
+//     /* =========================================
+//        FUNCTIONS
+//        =========================================
+//     */
+//     function routingToControllers($uri, $routes)
+//     {
+//         if(array_key_exists($uri, $routes))
+//         require base_path($routes[$uri]);
+//     else 
+//     {
+//         abort(404);
+//     }
+//     }
+
+//     function abort($code = 404)
+//     {
+//         http_response_code($code);
+//         require base_path("views/{$code}.php");
+//         die();
+//     }
+//     /* =END= */
+   
+//     routingToControllers($uri, $routes);
+?>
