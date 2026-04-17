@@ -1,4 +1,7 @@
 <?php 
+
+namespace core;
+use PDO;
     /* =======================================================
         CONNECTING TO THE DATABASE, AND EXECUTING A QUERY.
        =======================================================

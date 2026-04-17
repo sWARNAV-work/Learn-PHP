@@ -1,4 +1,5 @@
 <?php 
+use core\Response;
 function urlIs($value)
 {
     return $_SERVER['REQUEST_URI'] === $value;
