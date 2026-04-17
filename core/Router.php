@@ -1,26 +1,62 @@
 <?php 
+namespace core;
 
 class Router 
 {
-    public function get()
-    {
+    protected $routes = [];
 
-    }
-    public function post()
-    {
+    
 
-    }
-    public function delete()
+    public function get($uri, $controller)
     {
-
+        $this->routes[] = [
+            "uri" => $uri,
+            "controller" => $controller,
+            "method" => "GET"
+        ];
     }
-    public function put()
+    public function post($uri, $controller)
     {
-
+        $this->routes[] = [
+            "uri" => $uri,
+            "controller" => $controller,
+            "method" => "POST"
+        ];
     }
-    public function patch()
+    public function delete($uri, $controller)
     {
-        
+        $this->routes[] = [
+            "uri" => $uri,
+            "controller" => $controller,
+            "method" => "DELETE"
+        ];
+    }
+    public function put($uri, $controller)
+    {
+        $this->routes[] = [
+            "uri" => $uri,
+            "controller" => $controller,
+            "method" => "PUT"
+        ];
+    }
+    public function patch($uri, $controller)
+    {
+        $this->routes[] = [
+            "uri" => $uri,
+            "controller" => $controller,
+            "method" => "PATCH"
+        ];
+    }
+    public function route($uri, $method) //The One that does the routing
+    {
+        foreach($this->routes as $route)
+        {            
+        // dd($route['uri'] . " vs " . $uri); 
+        // dd($route['method'] . " vs " . strtoupper($method));
+            if($route['uri'] === $uri && $route["method"] === strtoupper($method))
+               return require base_path($route['controller']);  //Took me a little while to understand.
+        }
+        abort();
     }
 }
 
@@ -51,9 +87,7 @@ class Router
 
 
 
-// $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
-// $routes = require base_path('routes.php');
 
 
 //     /* =========================================
@@ -70,13 +104,8 @@ class Router
 //     }
 //     }
 
-//     function abort($code = 404)
-//     {
-//         http_response_code($code);
-//         require base_path("views/{$code}.php");
-//         die();
-//     }
+//     
 //     /* =END= */
    
-//     routingToControllers($uri, $routes);
+
 ?>

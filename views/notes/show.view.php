@@ -18,7 +18,8 @@
        =========================================
     -->
     <form class="mt-4" method="POST">
-      <input type="hidden" name="id" value="<?= $note["id"]; ?>">
+      <input type="hidden" name="_method" value="DELETE"> <!-- To send different types of requests. -->
+      <input type="hidden" name="id" value="<?= $note["id"]; ?>">  <!-- To send the id of the current user -->
       <button
         class="rounded-md border-b-4 border-b-purple-600 hover:border-b-red-600 bg-black px-3 py-2 text-sm text-purple-600 hover:text-red-600 ">Delete</button>
     </form>
