@@ -1,25 +1,55 @@
-<?php 
+<?php
 use core\Database;
 
-    $config = require base_path('config.php');
-    $db = new Database($config['database']);
+$config = require base_path('config.php');
+$db = new Database($config['database']);
 
-    $currentUserID = 1;
+$currentUserID = 1;
 
+/* =========================================================
+   VERIFYING NOTE IS FROM CURRENT user_id AND DELETING NOTE
+   =========================================================
+*/
+
+if ($_SERVER["REQUEST_METHOD"] === "POST")
+{
     $note = $db->query('SELECT * FROM notes where id = :id', [
-        
-        'id'=>$_GET['id'],
-        ])-> findOrDeny();
+        'id' => $_GET['id'],
+    ])->findOrDeny();
 
     authorize($note['user_id'] === $currentUserID);
 
-$heading = 'Note';
-view("notes/show.view.php", [
-    'heading' => "Note",
-    "note" => $note,
-]);
+    //Form was submitted, Delete the current Note.
+    $db->query("DELETE FROM notes WHERE id = :id", [
+        "id" => $_POST["id"],
+    ]);
+
+    header("location: /notes"); //Used to go back to /notes webpage.
+    exit();
+
+    /* =END= */
+}
+else
+{
+    /* =========================================
+       SHOWING THE NOTE
+       =========================================
+    */
+
+    $note = $db->query('SELECT * FROM notes where id = :id', [
+
+        'id' => $_GET['id'],
+    ])->findOrDeny();
+
+    authorize($note['user_id'] === $currentUserID);
+
+    $heading = 'Note';
+    view("notes/show.view.php", [
+        'heading' => "Note",
+        "note" => $note,
+    ]);
+
+    /* =END= */
+}
 
 ?>
-
-
-
