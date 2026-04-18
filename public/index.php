@@ -10,7 +10,7 @@ spl_autoload_register(function ($class)
 });
 // require base_path("core/Router.php"); Changing cause Router.php is now a class
 $router = new \core\Router();
-$routes = require base_path('routes.php');
+require base_path('routes.php');
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 // dd($_SERVER["REQUEST_URI"]);
 
