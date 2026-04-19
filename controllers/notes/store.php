@@ -1,12 +1,11 @@
 <?php
 use core\Validator;
 use core\Database;
+use core\App;
 // dd("Hey");
 // require base_path('core/validator.php'); ??Probably Redundant, Delete later. 
 
-
-$config = require base_path('config.php');
-$db = new Database($config['database']); //Creating the database class obj and passing the database connection values
+$db = App::resolve(Database::class);
 
 $errors = [];
 $range = 50; // The word limit of the Note
