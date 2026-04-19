@@ -8,6 +8,19 @@ spl_autoload_register(function ($class)
     $class = str_replace("\\", DIRECTORY_SEPARATOR, $class);
     require base_path("{$class}.php");
 });
+
+
+//Testing the service Container
+require base_path("Bootstrap.php");
+
+
+
+
+
+
+
+
+
 // require base_path("core/Router.php"); Changing cause Router.php is now a class
 $router = new \core\Router();
 require base_path('routes.php');
