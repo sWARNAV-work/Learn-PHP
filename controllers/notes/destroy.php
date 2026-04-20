@@ -2,7 +2,7 @@
 use core\Database;
 use core\App;
 
-$db = App::resolve(Database::class);
+$db = App::resolve(Database::class); // could also be written as resolve("\core\Database")
 
 
 $currentUserID = 1;
