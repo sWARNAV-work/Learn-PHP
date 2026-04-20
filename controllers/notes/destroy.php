@@ -11,9 +11,9 @@ $currentUserID = 1;
    VERIFYING NOTE IS FROM CURRENT user_id AND DELETING NOTE
    =========================================================
 */
-
+// dd($_POST["id"]);
 $note = $db->query('SELECT * FROM notes where id = :id', [
-    'id' => $_GET['id'],
+    'id' => $_POST['id'],
 ])->findOrDeny();
 
 authorize($note['user_id'] === $currentUserID);

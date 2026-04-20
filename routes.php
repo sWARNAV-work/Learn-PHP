@@ -41,10 +41,12 @@ $router->get("/about", "controllers/about.php");
 
 $router->get("/notes", "controllers/notes/index.php"); //Showing all notes
 
-$router->get("/note", "controllers/notes/show.php");
-$router->get("/notes/create", "controllers/notes/create.php");
-$router->post("/notes", "controllers/notes/store.php"); //Creating a new note
+$router->get("/note", "controllers/notes/show.php");//Showing a single note
+$router->get("/notes/create", "controllers/notes/create.php"); //Creation Page
+$router->post("/notes", "controllers/notes/store.php"); //Storing a new note
+
 $router->delete("/note", "controllers/notes/destroy.php"); // Deleting a note
+$router->get("/note/edit", "controllers/notes/edit.php"); // Editing a note
 
 
 
