@@ -19,7 +19,7 @@
     -->
     <div class="mt-6">
       <a href="/note/edit?id=<?= $note['id']; ?>"
-        class="rounded-md border-b-4 border-b-yellow-600 hover:border-b-green-800 bg-black px-3 py-2 text-sm text-yellow-600 hover:text-green-800">EDIT</a>
+        class="rounded-md border-b-4 border-b-purple-600 hover:border-b-green-800 bg-black px-3 py-2 text-sm text-purple-600 hover:text-green-800">EDIT</a>
     </div>
     <!-- =END= -->
 

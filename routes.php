@@ -47,6 +47,7 @@ $router->post("/notes", "controllers/notes/store.php"); //Storing a new note
 
 $router->delete("/note", "controllers/notes/destroy.php"); // Deleting a note
 $router->get("/note/edit", "controllers/notes/edit.php"); // Editing a note
+$router->patch("/note", "controllers/notes/update.php"); //Updating a note
 
 
 
