@@ -36,11 +36,13 @@ if (!$verify)
     $errors["body"] = "Enter Something between 1 and {$range} words!";
 if(!empty($errors))
 {
+    $note["body"] = $_POST["body"]; // Added so that user could rewrite their incorrect message.
     view("notes/edit.view.php", [
         "heading" => "Edit Note",
         "errors" => $errors,
         "note" => $note,
     ]);
+    exit ();
 }
 /* =END= */
 
@@ -52,6 +54,7 @@ $note = $db->query("UPDATE notes SET body = :body WHERE id = :id", [
     "id" => $_POST["id"],
     "body" => $_POST["body"]
 ]);
+/* =END= */
 
 header("location: /notes");
 exit();
