@@ -32,7 +32,7 @@
 
 
 /* ============================================
-   THE ABOVE, REFACTORED using a router object
+   THE ABOVE, REFACTORED using a router class object
    ============================================
 */
 $router->get("/", "controllers/index.php");
@@ -49,7 +49,8 @@ $router->delete("/note", "controllers/notes/destroy.php"); // Deleting a note
 $router->get("/note/edit", "controllers/notes/edit.php"); // Editing a note
 $router->patch("/note", "controllers/notes/update.php"); //Updating a note
 
-
+$router->get("/register", "controllers/register/create.php"); //Register Page
+$router->post("/register", "controllers/register/store.php"); // Store User 
 
 /* =END= */
 

@@ -7,7 +7,6 @@
       <p>Hey THERERERERERER! Don't contact me, I'm an introvert. I'm still wanted in some states for biting people who get too nosey. </p>
     </div>
   </main>
-</div>
 
 </body>
 </html>
