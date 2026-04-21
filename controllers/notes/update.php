@@ -42,7 +42,7 @@ if(!empty($errors))
         "errors" => $errors,
         "note" => $note,
     ]);
-    exit ();
+    exit ();// Hadn't placed it here earlier, code was folling through and updating Database.
 }
 /* =END= */
 
