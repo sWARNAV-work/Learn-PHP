@@ -50,6 +50,6 @@ use PDO;
             return $result;
         }
     }
-?>
+
 
 

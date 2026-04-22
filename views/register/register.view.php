@@ -15,7 +15,7 @@ require base_path("views/partials/nav.php");
             </div>
 
             <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form action="/register" method="POST" class="space-y-6" novalidate>
+                <form action="/register" method="POST" class="space-y-6" novalidate> <!-- added novalidate to prevent browser check -->
                     <div>
                         <label for="email" class="block text-sm/6 font-medium text-gray-100">Email address</label>
                         <div class="mt-2">
@@ -37,9 +37,14 @@ require base_path("views/partials/nav.php");
                             </div>
                         </div>
                         <div class="mt-2">
-                            <input id="password" type="password" name="password" required
+                            <input id="password" type="password" name="password" novalidate
                                 autocomplete="current-password"
                                 class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+
+                                <?php if (isset($errors["password"])) : ?>
+                                    <p class="text-red-900"><?= $errors["password"]; ?></p>
+                                <?php endif; ?>
+
                         </div>
                     </div>
 
