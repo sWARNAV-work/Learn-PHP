@@ -39,7 +39,7 @@ $router->get("/", "controllers/index.php");
 $router->get("/contact", "controllers/contact.php");
 $router->get("/about", "controllers/about.php");
 
-$router->get("/notes", "controllers/notes/index.php"); //Showing all notes
+$router->get("/notes", "controllers/notes/index.php")->user_type("authenticated"); //Showing all notes
 
 $router->get("/note", "controllers/notes/show.php");//Showing a single note
 $router->get("/notes/create", "controllers/notes/create.php"); //Creation Page

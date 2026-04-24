@@ -65,6 +65,14 @@ class Router
                         die();
                     }
                 }
+                else if ($route["middleware"] === "authenticated")
+                {
+                    if (empty($_SESSION["user"]))
+                    {
+                        header("location: /");
+                        die();
+                    }
+                }
                 return require base_path($route['controller']);
             }
         }
