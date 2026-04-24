@@ -1,52 +1,72 @@
-<?php 
+<?php
 namespace core;
 
-class Router 
+class Router
 {
     protected $routes = [];
 
     public function add($method, $uri, $controller)
     {
         $this->routes[] = [
-           "uri" => $uri,
+            "uri" => $uri,
             "controller" => $controller,
             "method" => $method,
+            "middleware" => null,
         ];
+        return $this;
     }
 
     public function get($uri, $controller)
     {
-        $this->add("GET", $uri, $controller);
+        return $this->add("GET", $uri, $controller);
     }
 
     public function post($uri, $controller)
     {
-        $this->add("POST", $uri, $controller);
+        return $this->add("POST", $uri, $controller);
     }
 
     public function delete($uri, $controller)
     {
-        $this->add("DELETE", $uri, $controller);
+        return $this->add("DELETE", $uri, $controller);
     }
 
     public function put($uri, $controller)
     {
-        $this->add("PUT", $uri, $controller);
+        return $this->add("PUT", $uri, $controller);
     }
 
     public function patch($uri, $controller)
     {
-        $this->add("PATCH", $uri, $controller);
+        return $this->add("PATCH", $uri, $controller);
     }
-    
+
+    public function user_type($key)
+    {
+        $this->routes[array_key_last($this->routes)]["middleware"] = $key;
+        // dd($this->routes);
+        return $this;
+    }
+
     public function route($uri, $method) //The One that does the routing
     {
-        foreach($this->routes as $route)
-        {            
-        // dd($route['uri'] . " vs " . $uri); 
-        // dd($route['method'] . " vs " . strtoupper($method));
-            if($route['uri'] === $uri && $route["method"] === strtoupper($method))
-               return require base_path($route['controller']);  //Took me a little while to understand.
+        // dd($this->routes);
+        foreach ($this->routes as $route)
+        {
+            // dd($route['uri'] . " vs " . $uri); 
+            // dd($route['method'] . " vs " . strtoupper($method));
+            if ($route['uri'] === $uri && $route["method"] === strtoupper($method)) //Took me a little while to understand.
+            {
+                if ($route["middleware"] === "guest")
+                {
+                    if ($_SESSION["user"] ?? false)
+                    {
+                        header("location: /");
+                        die();
+                    }
+                }
+                return require base_path($route['controller']);
+            }
         }
         abort();
     }
@@ -98,6 +118,6 @@ class Router
 
 //     
 //     /* =END= */
-   
+
 
 ?>

@@ -13,12 +13,8 @@ spl_autoload_register(function ($class)
 });
 
 
-//Testing the service Container
+//The service Container
 require base_path("Bootstrap.php");
-
-
-
-
 
 
 
