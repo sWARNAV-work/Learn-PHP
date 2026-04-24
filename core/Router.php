@@ -36,7 +36,6 @@ class Router
     {
         return $this->add("PUT", $uri, $controller);
     }
-
     public function patch($uri, $controller)
     {
         return $this->add("PATCH", $uri, $controller);
@@ -58,20 +57,7 @@ class Router
             // dd($route['method'] . " vs " . strtoupper($method));
             if ($route['uri'] === $uri && $route["method"] === strtoupper($method)) //Took me a little while to understand.
             {
-                if ($route["middleware"] ?? false)
-                {
-                    $middleware = Middleware::MAP[$route["middleware"]];
-                    (new $middleware)->handle();
-                }
-                
-                // if ($route["middleware"] === "guest")
-                // {
-                //     Guest::handle();
-                // }
-                // else if ($route["middleware"] === "authenticated")
-                // {
-                //     Authenticated::handle();
-                // }
+                (new Middleware)->resolve($route["middleware"]);
                 return require base_path($route['controller']);
             }
         }
