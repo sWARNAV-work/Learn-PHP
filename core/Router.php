@@ -67,7 +67,7 @@ class Router
                 }
                 else if ($route["middleware"] === "authenticated")
                 {
-                    if (empty($_SESSION["user"]))
+                    if (! ($_SESSION["user"] ?? false))
                     {
                         header("location: /");
                         die();
