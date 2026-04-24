@@ -1,5 +1,6 @@
 <?php
 namespace core;
+use core\middleware\Middleware;
 
 class Router
 {
@@ -57,22 +58,20 @@ class Router
             // dd($route['method'] . " vs " . strtoupper($method));
             if ($route['uri'] === $uri && $route["method"] === strtoupper($method)) //Took me a little while to understand.
             {
-                if ($route["middleware"] === "guest")
+                if ($route["middleware"] ?? false)
                 {
-                    if ($_SESSION["user"] ?? false)
-                    {
-                        header("location: /");
-                        die();
-                    }
+                    $middleware = Middleware::MAP[$route["middleware"]];
+                    (new $middleware)->handle();
                 }
-                else if ($route["middleware"] === "authenticated")
-                {
-                    if (! ($_SESSION["user"] ?? false))
-                    {
-                        header("location: /");
-                        die();
-                    }
-                }
+                
+                // if ($route["middleware"] === "guest")
+                // {
+                //     Guest::handle();
+                // }
+                // else if ($route["middleware"] === "authenticated")
+                // {
+                //     Authenticated::handle();
+                // }
                 return require base_path($route['controller']);
             }
         }
