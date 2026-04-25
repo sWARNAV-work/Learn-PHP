@@ -9,11 +9,17 @@ class Middleware
     ];
     public function resolve($middleware)
     {
-        if ($middleware)
+
+        if (! $middleware) 
         {
-            $ob = static::MAP[$middleware];
-            (new $ob)->handle();
-        }   
-        return;
+            return;
+        } 
+        $ob = static::MAP[$middleware] ?? false;
+
+        if (! $ob)
+            throw new \Exception("Nothing matched with the Middleware '{$middleware}'");
+        
+        (new $ob)->handle();  
+        
     }
 }

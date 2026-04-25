@@ -45,6 +45,9 @@
               <span class="sr-only">Open user menu</span>
             </button>
 
+          
+
+
             <?php if (! ($_SESSION["user"] ?? false)) : ?>
             <a href="/register" class="text-blue-700">Register</a>
             <?php else : ?>
