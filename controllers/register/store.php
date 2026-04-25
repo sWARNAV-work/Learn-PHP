@@ -18,10 +18,6 @@ $password = $_POST["password"];
     // else
     // Store them into DB if no conflicts   DONE.
         // Log in using Sessions            HALF DONE. 
-    
-    
-
-
 
 /* =========================================
    CHECK INPUTS
@@ -45,7 +41,6 @@ if (!empty($errors))
 /* =END= */
 
 
-
 /* =========================================
    CHECK CONFLICTING INPUTS
    =========================================
@@ -56,16 +51,13 @@ $user = $db->query("SELECT * FROM users WHERE email = :email", [
 
 if ($user)
 {
-    $_SESSION["user"] = [
-    "email" => $email
-];
+//     $_SESSION["user"] = [    //Logging in Logic
+//     "email" => $email
+// ];
     header("location: /");// Goto Login Page.
     exit();
 }
 /* =END= */
-
-
-
 
 
 /* =========================================
@@ -74,10 +66,9 @@ if ($user)
 */
 $db->query("INSERT INTO users (email, password) VALUES (:email, :password)", [
     "email" => $email,
-    "password" => $password
+    "password" => password_hash($password, PASSWORD_BCRYPT)
 ]);
 /* =END= */
-
 
 
 /* =========================================
