@@ -33,8 +33,16 @@ function base_path($path)
 }
 function view($path, $xtraAttr = [])
 {
+    // dd($path);
     extract($xtraAttr);
     require base_path('views/' . $path);
+}
+
+function login($user)
+{
+    $_SESSION["user"] = [
+        "email" => $user["email"],
+    ];
 }
 
 ?>

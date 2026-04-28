@@ -54,7 +54,7 @@ if ($user)
 //     $_SESSION["user"] = [    //Logging in Logic
 //     "email" => $email
 // ];
-    header("location: /");// Goto Login Page.
+    header("location: /login");// Goto Login Page.
     exit();
 }
 /* =END= */
@@ -75,8 +75,8 @@ $db->query("INSERT INTO users (email, password) VALUES (:email, :password)", [
    LOGGING IN USER
    =========================================
 */
-$_SESSION["user"] = [
+login([
     "email" => $email
-];
+]);
 header("location: /");
 exit();

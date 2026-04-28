@@ -14,10 +14,12 @@
             <a href="/about"
               class="<?= urlIs('/about') ? 'bg-gray-950/50 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium">About
               This Webpage</a>
+
             <?php if ($_SESSION["user"] ?? false) : ?>
             <a href="/notes"
               class="<?=  urlIs('/notes') ? 'bg-gray-950/50 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Notes</a>
             <?php endif; ?>
+
             <a href="/contact"
               class="<?= urlIs('/contact') ? 'bg-gray-950/50 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Contact</a>
           </div>
@@ -49,11 +51,13 @@
 
 
             <?php if (! ($_SESSION["user"] ?? false)) : ?>
-            <a href="/register" class="text-blue-700">Register</a>
+            <a href="/register" class="<?= urlIs('/register') ? 'bg-gray-950/50 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Register</a>
+            <a href="/login" class="<?= urlIs('/login') ? 'bg-gray-950/50 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Login</a>
             <?php else : ?>
               <img
                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt="" class="size-8 rounded-full outline -outline-offset-1 outline-white/10" />
+                <a href="/logout" class='text-gray-300 hover:bg-white/5 hover:text-white rounded-md px-3 py-2 text-sm font-medium'>Log Out</a>
             <?php endif; ?>
 
             <el-menu anchor="bottom end" popover
