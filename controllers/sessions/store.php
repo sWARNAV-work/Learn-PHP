@@ -1,4 +1,4 @@
-<?php 
+<?php
 // dd("reached!");
 use core\Database;
 use core\App;
@@ -17,11 +17,11 @@ $errors = [];
    VALIDATING CORRECT EMAIL PATTERN
    =========================================
 */
-if (! Validator::email($email))
+if (!Validator::email($email))
 {
     $errors["email"] = "Enter a Valid Email.";
 }
-if( $errors ?? false)
+if ($errors ?? false)
 {
     return view("sessions/login.view.php", [
         "errors" => $errors,
@@ -33,22 +33,26 @@ if( $errors ?? false)
    Checking into Database
    =========================================
 */
-$check = $db->query("SELECT * FROM users WHERE email = :email AND password = :password", [
+$check = $db->query("SELECT * FROM users WHERE email = :email", [
     "email" => $email,
-    "password" => $password,
 ])->find();
-if($check)
-{
-    login([
-        "email" => $check["email"]
-    ]);
-    header("location: /");
-} 
-else 
-{
-    $errors["login"]= "Incorrect email and password combination";
 
-    return view("sessions/login.view.php", [
-        "errors" => $errors,
-    ]);
+if ($check)
+{
+    if (password_verify($password, $check["password"]))
+    {
+        login([
+            "email" => $check["email"]
+        ]);
+        header("location: /");
+        exit();
+    }
+
 }
+
+$errors["login"] = "Incorrect email and password combination";
+
+return view("sessions/login.view.php", [
+    "errors" => $errors,
+]);
+
