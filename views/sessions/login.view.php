@@ -23,9 +23,7 @@ require base_path("views/partials/nav.php");
                             <input id="email" type="email" name="email" autocomplete="email"
                                 class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
 
-                            <?php if (isset($errors["email"])): ?>
-                                <p class="text-red-900"><?= $errors["email"]; ?></p>
-                            <?php endif; ?>
+                            
                         </div>
                     </div>
 
@@ -48,6 +46,10 @@ require base_path("views/partials/nav.php");
 
                         </div>
                     </div>
+
+                    <?php if (isset($errors["login"])): ?>
+                                <p class="text-red-900 mt-4"><?= $errors["login"]; ?></p>
+                            <?php endif; ?>
 
                     <div>
                         <button type="submit"

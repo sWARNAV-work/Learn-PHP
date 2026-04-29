@@ -46,8 +46,7 @@ if($check)
 } 
 else 
 {
-    $errors[$email]= "Incorrect email and password combination";
-    $errors[$password]= "Incorrect email and password combination";
+    $errors["login"]= "Incorrect email and password combination";
 
     return view("sessions/login.view.php", [
         "errors" => $errors,
