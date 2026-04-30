@@ -55,7 +55,7 @@ $router->post("/register", "controllers/register/store.php"); // Store User
 $router->get("/login", "controllers/sessions/create.php")->user_type("guest"); //Login Page
 $router->post("/login", "controllers/sessions/store.php")->user_type("guest"); //Logging in the user
 
-$router->get("/logout", "controllers/sessions/destroy.php")->user_type("authenticated");
+$router->delete("/logout", "controllers/sessions/destroy.php")->user_type("authenticated");
 
 /* =END= */
 

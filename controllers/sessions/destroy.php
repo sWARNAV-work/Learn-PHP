@@ -1,5 +1,8 @@
 <?php 
-$_SESSION = [];
+
+logout();
+
+
 header("location: /");
 
 // return view("sessions/logout.view.php");
