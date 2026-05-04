@@ -1,26 +1,18 @@
 <?php 
-
 namespace html\forms;
 
 use core\Validator;
 
 class ValLogin
 {
-    protected $errors = []; //readonly works in newer version of PHP from 8.1, will use it in future
-
-    public function validate($email, $password)
+    protected $errors = [];
+    public function validate($email)
     {
-        $range = 5;
-
-        if (! Validator::email($email))
+        if( !Validator::email($email))
         {
-            $this->errors["email"] = "We know it is tedious, but we need to have a proper email.";
+            $this->errors["login"] = "The email entered is not valid.";
         }
-        if (! Validator::string($password, 1, $range))
-        {
-            $this->errors["password"] = "Please input a password between 1 and {$range}";
-        }
-        return empty($this->errors) ?? false;
+        return empty($this->errors);
     }
     public function getErrors()
     {

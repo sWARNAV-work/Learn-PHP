@@ -1,8 +1,8 @@
 <?php
-// dd("reached!");
+// dd("reached!"
 use core\Database;
 use core\App;
-use core\Validator;
+use html\forms\ValLogin;
 
 $db = App::resolve(Database::class);
 
@@ -17,14 +17,11 @@ $errors = [];
    VALIDATING CORRECT EMAIL PATTERN
    =========================================
 */
-if (!Validator::email($email))
-{
-    $errors["email"] = "Enter a Valid Email.";
-}
-if ($errors ?? false)
+$login = new ValLogin();
+if( !$login->validate($email))
 {
     return view("sessions/login.view.php", [
-        "errors" => $errors,
+        "errors" => $login->getErrors()
     ]);
 }
 /* =END= */

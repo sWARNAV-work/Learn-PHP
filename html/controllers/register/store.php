@@ -1,9 +1,9 @@
 <?php 
 
-use core\Validator;
+
 use core\Database;
 use core\App;
-use html\forms\ValLogin;
+use html\forms\ValRegister;
 
 $db = App::resolve(Database::class);
 
@@ -25,7 +25,7 @@ $password = $_POST["password"];
    =========================================
 */
 
-$ValLog = new ValLogin();
+$ValLog = new ValRegister();
 $test = $ValLog->validate($email, $password); 
 if(! $test)
 {
@@ -33,25 +33,6 @@ if(! $test)
         "errors" => $ValLog->getErrors(),
     ]);
 }
-
-
-
-
-
-// if(!Validator::email($email)) //Checking for a proper email input
-// {
-//     $errors["email"] = "I know it is tedious, but we need to have a proper email.";
-// }
-// if (!Validator::string($password, 7, 255))
-// {
-//     $errors["password"] = "Enter a Password between 7 and 255 characters.";
-// }
-// if (!empty($errors))
-// {
-//     return view("register/register.view.php", [
-//         "errors" => $errors,
-//     ]);
-// }
 /* =END= */
 
 
@@ -72,7 +53,6 @@ if ($user)
     return view("sessions/login.view.php", [
         "errors" => $errors
     ]);// Goto Login Page.
-    exit();
 }
 /* =END= */
 
