@@ -3,6 +3,7 @@
 use core\Validator;
 use core\Database;
 use core\App;
+use html\forms\ValLogin;
 
 $db = App::resolve(Database::class);
 
@@ -23,21 +24,34 @@ $password = $_POST["password"];
    CHECK INPUTS
    =========================================
 */
-if(!Validator::email($email)) //Checking for a proper email input
-{
-    $errors["email"] = "I know it is tedious, but we need to have a proper email.";
-}
-if (!Validator::string($password, 7, 255))
-{
-    $errors["password"] = "Enter a Password between 7 and 255 characters.";
-}
-if (!empty($errors))
+
+$ValLog = new ValLogin();
+$test = $ValLog->validate($email, $password); 
+if(! $test)
 {
     return view("register/register.view.php", [
-        "errors" => $errors,
+        "errors" => $ValLog->getErrors(),
     ]);
-    die();
 }
+
+
+
+
+
+// if(!Validator::email($email)) //Checking for a proper email input
+// {
+//     $errors["email"] = "I know it is tedious, but we need to have a proper email.";
+// }
+// if (!Validator::string($password, 7, 255))
+// {
+//     $errors["password"] = "Enter a Password between 7 and 255 characters.";
+// }
+// if (!empty($errors))
+// {
+//     return view("register/register.view.php", [
+//         "errors" => $errors,
+//     ]);
+// }
 /* =END= */
 
 
@@ -54,7 +68,10 @@ if ($user)
 //     $_SESSION["user"] = [    //Logging in Logic
 //     "email" => $email
 // ];
-    header("location: /login");// Goto Login Page.
+    $errors["login"] = "You are already registered with us, Please Log in.";
+    return view("sessions/login.view.php", [
+        "errors" => $errors
+    ]);// Goto Login Page.
     exit();
 }
 /* =END= */

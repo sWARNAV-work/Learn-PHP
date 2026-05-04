@@ -35,28 +35,26 @@
    THE ABOVE, REFACTORED using a router class object
    ============================================
 */
-$router->get("/", "controllers/index.php");
-$router->get("/contact", "controllers/contact.php");
-$router->get("/about", "controllers/about.php");
+$router->get("/", "/index.php");
+$router->get("/contact", "/contact.php");
+$router->get("/about", "/about.php");
 
-$router->get("/notes", "controllers/notes/index.php")->user_type("authenticated"); //Showing all notes
+$router->get("/notes", "/notes/index.php")->user_type("authenticated"); //Showing all notes
 
-$router->get("/note", "controllers/notes/show.php");//Showing a single note
-$router->get("/notes/create", "controllers/notes/create.php"); //Creation Page
-$router->post("/notes", "controllers/notes/store.php"); //Storing a new note
+$router->get("/note", "/notes/show.php");//Showing a single note
+$router->get("/notes/create", "/notes/create.php"); //Creation Page
+$router->post("/notes", "/notes/store.php"); //Storing a new note
 
-$router->delete("/note", "controllers/notes/destroy.php"); // Deleting a note
-$router->get("/note/edit", "controllers/notes/edit.php"); // Editing a note
-$router->patch("/note", "controllers/notes/update.php"); //Updating a note
+$router->delete("/note", "/notes/destroy.php"); // Deleting a note
+$router->get("/note/edit", "/notes/edit.php"); // Editing a note
+$router->patch("/note", "/notes/update.php"); //Updating a note
 
-$router->get("/register", "controllers/register/create.php")->user_type("guest"); //Register Page
-$router->post("/register", "controllers/register/store.php"); // Store User 
+$router->get("/register", "/register/create.php")->user_type("guest"); //Register Page
+$router->post("/register", "/register/store.php"); // Store User 
 
-$router->get("/login", "controllers/sessions/create.php")->user_type("guest"); //Login Page
-$router->post("/login", "controllers/sessions/store.php")->user_type("guest"); //Logging in the user
+$router->get("/login", "/sessions/create.php")->user_type("guest"); //Login Page
+$router->post("/login", "/sessions/store.php")->user_type("guest"); //Logging in the user
 
-$router->delete("/logout", "controllers/sessions/destroy.php")->user_type("authenticated");
+$router->delete("/logout", "/sessions/destroy.php")->user_type("authenticated");
 
 /* =END= */
-
-?>

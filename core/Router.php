@@ -58,7 +58,8 @@ class Router
             if ($route['uri'] === $uri && $route["method"] === strtoupper($method)) //Took me a little while to understand.
             {
                 (new Middleware)->resolve($route["middleware"]);
-                return require base_path($route['controller']);
+                
+                return require base_path("html/controllers" . $route['controller']);
             }
         }
         abort();
