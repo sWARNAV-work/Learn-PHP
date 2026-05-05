@@ -14,11 +14,12 @@ $errors = [];
 //Check Into Database
 
 /* =========================================
-   VALIDATING CORRECT EMAIL PATTERN
+   VALIDATING CORRECT EMAIL format
    =========================================
 */
+// Only checking email since password check seems counterintuitive. 
 $login = new ValLogin();
-if( !$login->validate($email))
+if( !$login->validate($email, $password))
 {
     return view("sessions/login.view.php", [
         "errors" => $login->getErrors()

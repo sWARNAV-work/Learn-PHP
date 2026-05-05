@@ -1,31 +1,19 @@
-<?php
-//This Validates Register login and password format. 
+<?php 
 
 namespace html\forms;
 
 use core\Validator;
-
-
-class ValRegister
+class ValRegister extends Form
 {
-    protected $errors = []; //readonly won't work here, as the array is initialized multiple times.
-
     public function validate($email, $password)
     {
         $range = 255;
 
         if (!Validator::email($email))
-        {
-            $this->errors["email"] = "We know it is tedious, but we need to have a proper email.";
-        }
+            $this->addError("email", "We know it is tedious, But please provide us with a proper email to reach you.");
         if (!Validator::string($password, 1, $range))
-        {
-            $this->errors["password"] = "Please input a password between 1 and {$range}";
-        }
-        return empty($this->errors) ?? false;
-    }
-    public function getErrors()
-    {
-        return $this->errors;
+            $this->addError("password", "Please provide us with a valid Password");
+        
+        return (empty($this->errors));
     }
 }
