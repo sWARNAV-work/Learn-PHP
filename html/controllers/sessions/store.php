@@ -1,56 +1,46 @@
 <?php
-// dd("reached!"
-use core\Database;
-use core\App;
-use html\forms\ValLogin;
 
-$db = App::resolve(Database::class);
+use html\forms\ValLogin;
+use core\Authenticator;
 
 $email = $_POST["email"];
 $password = $_POST["password"];
 
 $errors = [];
-//Validate Email is correctly entered. 
-//Check Into Database
 
 /* =========================================
-   VALIDATING CORRECT EMAIL format
+   VALIDATING CORRECT EMAIL and password
    =========================================
 */
-// Only checking email since password check seems counterintuitive. 
+// Only checking email since password check seems counterintuitive, is what I thought at first.
+// Not intuitive, since a wrong input could be used to check a huge DB which slows everything down. Also a hacker could put a 10MB long string which could slow down or overload the server. 
+
 $login = new ValLogin();
-if( !$login->validate($email, $password))
+if ($login->validate($email, $password))
 {
-    return view("sessions/login.view.php", [
-        "errors" => $login->getErrors()
-    ]);
-}
-/* =END= */
+    $auth = new Authenticator;
+    $check = $auth->AttemptToLogin($email, $password);
 
-/* =========================================
-   Checking into Database
-   =========================================
-*/
-$check = $db->query("SELECT * FROM users WHERE email = :email", [
-    "email" => $email,
-])->find();
-
-if ($check)
-{
-    if (password_verify($password, $check["password"]))
+    if ($check)
     {
-        login([
-            "email" => $check["email"]
-        ]);
-        header("location: /");
-        exit();
+        $user["email"] = $email;
+        $auth->login($user);
+        redirect("/");
     }
-
+    else
+    {
+        $login->addError("login", "No Email and Password Combination Found.");
+    }
 }
-
-$errors["login"] = "Incorrect email and password combination";
 
 return view("sessions/login.view.php", [
-    "errors" => $errors,
+    "errors" => $login->getErrors()
 ]);
+
+
+
+
+
+
+
 

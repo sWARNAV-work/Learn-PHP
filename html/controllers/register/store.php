@@ -1,6 +1,6 @@
 <?php 
 
-
+use core\Authenticator;
 use core\Database;
 use core\App;
 use html\forms\ValRegister;
@@ -72,7 +72,7 @@ $db->query("INSERT INTO users (email, password) VALUES (:email, :password)", [
    LOGGING IN USER
    =========================================
 */
-login([
+(new Authenticator)->login([
     "email" => $email
 ]);
 header("location: /");

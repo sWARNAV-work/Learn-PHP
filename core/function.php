@@ -39,13 +39,7 @@ function view($path, $xtraAttr = [])
     require base_path('views/' . $path);
 }
 
-function login($user)
-{
-    $_SESSION["user"] = [
-        "email" => $user["email"],
-    ];
-    session_regenerate_id(true);
-}
+
 
 function logout()
 {
@@ -57,4 +51,8 @@ function logout()
 
 }
 
-?>
+function redirect($address)
+{
+    header("location: {$address}");
+    exit();
+}
