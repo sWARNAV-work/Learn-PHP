@@ -35,6 +35,7 @@ $method = $_POST["_method"] ?? $_SERVER["REQUEST_METHOD"]; // Using a hidden inp
 
 $router->route($uri, $method);
 
-
+use core\Session;
+Session::unflash();
 
 ?>

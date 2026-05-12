@@ -1,7 +1,7 @@
 <?php
 namespace html\forms;
 
-use core\Validator;
+// use core\Validator;
 
 abstract class Form
 {

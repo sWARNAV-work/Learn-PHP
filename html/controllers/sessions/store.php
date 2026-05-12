@@ -2,6 +2,7 @@
 
 use html\forms\ValLogin;
 use core\Authenticator;
+use core\Session;
 
 $email = $_POST["email"];
 $password = $_POST["password"];
@@ -25,7 +26,7 @@ if ($login->validate($email, $password))
     {
         $user["email"] = $email;
         $auth->login($user);
-        redirect("/");
+        return redirect("/");
     }
     else
     {
@@ -33,9 +34,16 @@ if ($login->validate($email, $password))
     }
 }
 
-return view("sessions/login.view.php", [
-    "errors" => $login->getErrors()
-]);
+Session::flash("errors", $login->getErrors());
+
+redirect("/login");
+
+
+
+
+// return view("sessions/login.view.php", [
+//     "errors" => $login->getErrors()
+// ]);
 
 
 
