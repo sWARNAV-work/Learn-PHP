@@ -4,6 +4,7 @@ use core\Authenticator;
 use core\Database;
 use core\App;
 use html\forms\ValRegister;
+use core\Session;
 
 $db = App::resolve(Database::class);
 
@@ -49,10 +50,15 @@ if ($user)
 //     $_SESSION["user"] = [    //Logging in Logic
 //     "email" => $email
 // ];
+
     $errors["login"] = "You are already registered with us, Please Log in.";
-    return view("sessions/login.view.php", [
-        "errors" => $errors
-    ]);// Goto Login Page.
+    Session::flash("errors", $errors);
+    redirect("/login");                                     //Properly calling login class
+
+    
+    // return view("sessions/login.view.php", [             //Just calling the view of login class
+    //     "errors" => $errors
+    // ]);
 }
 /* =END= */
 
