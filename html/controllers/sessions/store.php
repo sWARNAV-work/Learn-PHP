@@ -35,6 +35,9 @@ if ($login->validate($email, $password))
 }
 
 Session::flash("errors", $login->getErrors());
+Session::flash("old", [
+    "email" => $email
+]);
 
 redirect("/login");
 

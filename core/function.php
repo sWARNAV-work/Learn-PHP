@@ -56,3 +56,8 @@ function redirect($address)
     header("location: {$address}");
     exit();
 }
+
+function old($key, $default = " ")
+{
+    return core\Session::get("old")[$key] ?? $default;
+}
