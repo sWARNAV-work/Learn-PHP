@@ -15,6 +15,10 @@ abstract class Form
     {
         return $this->errors;
     }
+    public function failed()
+    {
+        return count($this->errors);
+    }
 }
 
 

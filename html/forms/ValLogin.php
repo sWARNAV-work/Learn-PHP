@@ -1,20 +1,33 @@
-<?php 
+<?php
 namespace html\forms;
 
 use core\Validator;
+use core\ValidationExceptions;
 
 class ValLogin extends Form
 {
-    public function validate($email, $password)
+    // public array $attributes = []; // Same as using the Parameter input below, part 1.
+    function __construct(public array $attributes)
     {
+        // $this->attributes = $attributes; // Same as using the Parameter input above, part 2.
+        
         $range = 255;
 
-        if (!Validator::email($email))
+        if (!Validator::email($attributes["email"]))
             $this->addError("login", "Please provide us with a valid Email/Password.");
-        if (!Validator::string($password, 1, $range))
-            $this->addError("login", "Please provide us with a valid Email/Password."); //Just for the time being, to check. Will fix it.
-        
-        return (empty($this->errors));
+        if (!Validator::string($attributes["password"], 1, $range))
+            $this->addError("login", "Please provide us with a valid Email/Password.");
+
+    }
+
+    public static function validate($attributes)
+    {
+        $instance = new static($attributes);
+        if ($instance->failed())
+        {
+            ValidationExceptions::throw($instance->attributes["email"], $instance->getErrors());
+        }
+        return $instance;
     }
 
 }
