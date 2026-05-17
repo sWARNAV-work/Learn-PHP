@@ -30,4 +30,10 @@ class ValLogin extends Form
         return $instance;
     }
 
+    public function throw()
+    {     
+        ValidationExceptions::throw($this->attributes["email"], $this->getErrors());
+    }
+
+
 }

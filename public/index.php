@@ -1,4 +1,7 @@
 <?php
+use core\ValidationExceptions;
+use core\Session;
+
 if ($_SERVER['SERVER_NAME'] === 'localhost') {
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
@@ -33,9 +36,22 @@ $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 // $method = $_SERVER["REQUEST_METHOD"]; //Can only differentiate between POST ond GET requests.
 $method = $_POST["_method"] ?? $_SERVER["REQUEST_METHOD"]; // Using a hidden input to get the request type.
 
-$router->route($uri, $method);
+try
+{
+    $router->route($uri, $method);
+}
+catch (ValidationExceptions $exception)
+{
+    Session::flash("errors", $exception->errors);
+    Session::flash("old", [
+        "email" => $exception->old
+    ]);
 
-use core\Session;
+    // dd($_SERVER["HTTP_REFERER"]);
+    return redirect($router->previousUrl());
+}
+
+
 Session::unflash();
 
 ?>

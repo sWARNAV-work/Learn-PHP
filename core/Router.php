@@ -48,6 +48,11 @@ class Router
         return $this;
     }
 
+    public function previousUrl()
+    {
+        return $_SERVER["HTTP_REFERER"];
+    }
+
     public function route($uri, $method) //The One that does the routing
     {
         // dd($this->routes);

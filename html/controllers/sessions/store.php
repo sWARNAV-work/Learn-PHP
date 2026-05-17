@@ -2,8 +2,7 @@
 
 use html\forms\ValLogin;
 use core\Authenticator;
-use core\Session;
-use core\ValidationExceptions;
+
 
 // $email = $_POST["email"];
 // $password = $_POST["password"];
@@ -22,32 +21,29 @@ $errors = [];
 // Not intuitive, since a wrong input could be used to check a huge DB which slows everything down. Also a hacker could put a 10MB long string which could slow down or overload the server. 
 
 
-try
-{
-    $login = ValLogin::validate($attributes);
-}
-catch (ValidationExceptions $exception)
-{
-    Session::flash("errors", $exception->errors);
-    Session::flash("old", [
-        "email" => $exception->old
-    ]);
 
-    redirect("/login");
-}
+    $login = ValLogin::validate($attributes);
+
 
 $auth = new Authenticator;
 $check = $auth->AttemptToLogin($attributes["email"], $attributes["password"]);
 
 if ($check)
 {
-    $user["email"] = $attributes["email"];
-    $auth->login($user);
+    $auth->login($attributes);
     return redirect("/");
 }
 else
 {
-    $login->addError("login", "No Email and Password Combination Found.");
+    $login->addError("login", "No Email and Password Combination Found-Ah!.");
+    $login->throw();
+       return redirect("/login");
+
+
+
+
+// $login->addError("login", "No Email and Password Combination Found.");
+    // return redirect("/login");
 }
 
 
