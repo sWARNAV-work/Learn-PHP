@@ -28,7 +28,7 @@ $login = ValLogin::validate($attributes);
 $auth = new Authenticator;
 $check = $auth->AttemptToLogin($attributes["email"], $attributes["password"]);
 
-if (! $check)
+if (!$check)
 {
     $login->addError("login", "No Email and Password Combination Found-Ah!.")->throw();
 }
