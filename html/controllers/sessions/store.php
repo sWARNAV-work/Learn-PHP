@@ -22,28 +22,19 @@ $errors = [];
 
 
 
-    $login = ValLogin::validate($attributes);
+$login = ValLogin::validate($attributes);
 
 
 $auth = new Authenticator;
 $check = $auth->AttemptToLogin($attributes["email"], $attributes["password"]);
 
-if ($check)
+if (! $check)
 {
-    $auth->login($attributes);
-    return redirect("/");
+    $login->addError("login", "No Email and Password Combination Found-Ah!.")->throw();
 }
 else
 {
-    $login->addError("login", "No Email and Password Combination Found-Ah!.");
-    $login->throw();
-       return redirect("/login");
-
-
-
-
-// $login->addError("login", "No Email and Password Combination Found.");
-    // return redirect("/login");
+    return redirect("/");
 }
 
 

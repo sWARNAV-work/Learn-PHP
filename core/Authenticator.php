@@ -13,6 +13,9 @@ class Authenticator
         {
             if (password_verify($password, $holdInfo["password"]))
             {
+                $this->login([
+                    "email" => $email
+                ]);
                 return true;
             }
         }

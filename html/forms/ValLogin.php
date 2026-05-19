@@ -23,11 +23,14 @@ class ValLogin extends Form
     public static function validate($attributes)
     {
         $instance = new static($attributes);
-        if ($instance->failed())
-        {
-            ValidationExceptions::throw($instance->attributes["email"], $instance->getErrors());
-        }
-        return $instance;
+        return $instance->failed() ? $instance->throw() : $instance;
+        
+        
+        // if ($instance->failed())
+        // {
+        //     ValidationExceptions::throw($instance->attributes["email"], $instance->getErrors());
+        // }
+        // return $instance;
     }
 
     public function throw()

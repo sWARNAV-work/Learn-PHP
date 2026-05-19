@@ -7,9 +7,10 @@ abstract class Form
 {
     protected $errors = [];
 
-    public function addError($key, $error): void
+    public function addError($key, $error): object
     {
         $this->errors[$key] = $error;
+        return $this;
     }
     public function getErrors(): array
     {
