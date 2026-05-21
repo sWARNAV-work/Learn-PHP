@@ -6,13 +6,24 @@
             "email": "swarnavsarkar20@protonmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "illuminate/collections": "^13.11"
+    },
     "autoload": 
     {
         "psr-4": 
         {
             "core\\": "core/",
-            "html\\forms\\": "html/forms"
+            "html\\forms\\": "html/forms",
+            "Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^4.7"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     }
 }
